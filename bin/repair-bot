@@ -1,0 +1,32 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -Eeuo pipefail
+
+ROOT="/data/data/com.termux/files/home/mikis13-nexus"
+cd "$ROOT"
+
+echo "🤖 MIKIS13 NEXUS PRO REPAIR BOT"
+
+for ROUND in 1 2 3
+do
+  echo
+  echo "=== Repair ronde $ROUND/3 ==="
+
+  chmod +x     nexus.py     bin/nexus     bin/repair-bot     tests/test.sh 2>/dev/null || true
+
+  mkdir -p data logs reports
+
+  if timeout 90 python nexus.py repair
+  then
+    echo
+    echo "✅ REPAIR BOT PASS"
+    exit 0
+  fi
+
+  echo "⚠️ Repair ronde $ROUND faalde"
+
+  sleep 1
+done
+
+echo
+echo "❌ REPAIR BOT FAIL"
+exit 1

@@ -1,0 +1,12 @@
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+__pycache__/
+*.pyc
+data/nexus.db
+logs/*
+!logs/.gitkeep
+reports/*.json
